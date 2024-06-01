@@ -1,5 +1,6 @@
 import 'package:cash/consts/app_text_styles/settings_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/onboarding_text_style.dart';
@@ -14,20 +15,29 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: SvgPicture.asset(
+              'assets/icons/leading.svg',
+              width: size.width * 0.08,
+              height: size.width * 0.08,
+            ),
+          ),
           elevation: 0,
+          centerTitle: true,
           title: const Text(
-            'Hockey news',
+            'News',
             style: SettingsTextStyle.title,
           ),
         ),
         body: Container(
-          decoration: const BoxDecoration(color: AppColors.blackColor),
           child: Column(children: [
             Expanded(
               child: ListView.builder(
@@ -38,7 +48,7 @@ class NewsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.01,
+              height: size.height * 0.01,
             ),
           ]),
         ));

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 class ConstructorTextStyle {
-  static const TextStyle typeName = TextStyle(
+  static const TextStyle subtitle = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 20.0,
-    color: Colors.white,
-    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+    color: AppColors.blackColor,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle cost = const TextStyle(
     fontFamily: 'Roboto',

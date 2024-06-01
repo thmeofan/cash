@@ -27,8 +27,8 @@ class InputWidget extends StatelessWidget {
         horizontal: 8.0,
       ),
       child: Container(
-        height: size.height * 0.075,
-        decoration: const BoxDecoration(
+        height: size.height * 0.06,
+        decoration: BoxDecoration(
           color: AppColors.lightGreyColor,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),

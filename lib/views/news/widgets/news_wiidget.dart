@@ -23,62 +23,53 @@ class NewsWidget extends StatelessWidget {
               .pushNamed(AppRoutes.article, arguments: newsModel);
         },
         child: Container(
-          height: screenSize.height * 0.12,
+          height: screenSize.width * 0.3 + 4,
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(vertical: screenSize.width * 0.01),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            //color: AppColors.darkGreyColor,
+            //  borderRadius: BorderRadius.circular(15.0),
+            border: Border(
+              bottom: BorderSide(width: 0.2, color: Colors.grey),
+            ),
           ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: FancyShimmerImage(
-                  width: screenSize.width * 0.3,
-                  height: screenSize.height * 0.13,
-                  boxFit: BoxFit.cover,
-                  imageUrl: newsModel.imageUrl,
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        newsModel.title,
-                        maxLines: 1,
-                        style: NewsTextStyle.title,
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.01,
-                      ),
-                      Expanded(
-                        child: Text(
-                          newsModel.text,
-                          style: NewsTextStyle.preview,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          newsModel.title,
                           maxLines: 3,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
+                          style: NewsTextStyle.title,
                         ),
-                      ),
-                      SizedBox(
-                        height: screenSize.height * 0.02,
-                      ),
-                      Text(
-                        newsModel.date,
-                        // style: NewsTextStyle.date,
-                      ),
-                    ],
+                        Spacer(),
+                        Text(
+                          newsModel.date,
+                          // style: NewsTextStyle.date,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              )
-            ],
+                const SizedBox(
+                  width: 5,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: FancyShimmerImage(
+                    width: screenSize.width * 0.3,
+                    height: screenSize.width * 0.3,
+                    boxFit: BoxFit.cover,
+                    imageUrl: newsModel.imageUrl,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

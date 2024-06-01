@@ -1,3 +1,4 @@
+import 'package:cash/consts/app_text_styles/constructor_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,14 +16,14 @@ class ConstructorScreen extends StatefulWidget {
 
 class _ConstructorScreenState extends State<ConstructorScreen> {
   final _amountController = TextEditingController();
-  final _nameController = TextEditingController();
+
   String _operationType = 'Income';
   List<bool> _isSelected = [true, false];
   String _selectedCategory = '';
   final List<Map<String, dynamic>> _incomeCategories = [
     {'name': 'Salary', 'icon': 'assets/icons/salary.svg'},
     {'name': 'Dividends', 'icon': 'assets/icons/dividends.svg'},
-    {'name': 'Investment', 'icon': 'assets/icons/investmentI.svg'},
+    {'name': 'Investment', 'icon': 'assets/icons/investment.svg'},
     {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
     {'name': 'Freelance', 'icon': 'assets/icons/freelance.svg'},
     {'name': 'Business', 'icon': 'assets/icons/business.svg'},
@@ -36,7 +37,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     {'name': 'Transport', 'icon': 'assets/icons/transport.svg'},
     {'name': 'Rest', 'icon': 'assets/icons/rest.svg'},
     {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
-    {'name': 'Investment', 'icon': 'assets/icons/investmentE.svg'},
+    {'name': 'Investment', 'icon': 'assets/icons/investment.svg'},
   ];
 
   void _toggleOperationType(int index) {
@@ -61,9 +62,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     try {
       final amount = double.tryParse(_amountController.text);
 
-      if (_selectedCategory.isEmpty ||
-          amount == null ||
-          _nameController.text.isEmpty) {
+      if (_selectedCategory.isEmpty || amount == null) {
         _showErrorSnackBar('Make sure you filled all the fields');
         debugPrint(
             'Validation failed: category, amount, or name of the operation is missing.');
@@ -71,7 +70,6 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
       }
 
       final operation = {
-        'name': _nameController.text,
         'description': _selectedCategory,
         'amount': amount,
         'type': _operationType,
@@ -216,19 +214,32 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InputWidget(
-                      controller: _nameController,
-                      label: 'Enter operation name',
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        'Amount (\$)',
+                        style: ConstructorTextStyle.subtitle,
+                      ),
                     ),
                     SizedBox(height: 5),
                     InputWidget(
                       controller: _amountController,
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
-                      label: 'Enter amount',
+                      label: _operationType == 'Income'
+                          ? 'Income Amount'
+                          : 'Expense Amount',
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        'Expense category',
+                        style: ConstructorTextStyle.subtitle,
+                      ),
+                    ),
                     SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -242,53 +253,61 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                         _selectCategory(category['name']),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
-                                        horizontal: size.width * 0.05,
-                                        vertical: size.height * 0.015,
+                                        horizontal: size.width * 0.02,
+                                        vertical: size.height * 0.01,
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          // mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: _selectedCategory ==
-                                                        category['name']
-                                                    ? AppColors.yellowColor
-                                                    : AppColors.blackColor
-                                                        .withOpacity(0.06),
-                                              ),
-                                              padding: EdgeInsets.all(
-                                                  size.width * 0.01),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: SvgPicture.asset(
-                                                  category['icon'],
-                                                  color: _selectedCategory ==
-                                                          category['name']
-                                                      ? Colors.white
-                                                      : AppColors.blackColor,
-                                                  width: size.width * 0.06,
-                                                  height: size.width * 0.06,
-                                                ),
-                                              ),
+                                      child: Row(
+                                        // mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          SvgPicture.asset(
+                                            _selectedCategory ==
+                                                    category['name']
+                                                ? 'assets/icons/circle_check.svg'
+                                                : 'assets/icons/circle.svg',
+                                            width: size.width * 0.06,
+                                            height: size.width * 0.06,
+                                          ),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: _selectedCategory ==
+                                                      category['name']
+                                                  ? AppColors.yellowColor
+                                                  : AppColors.blackColor
+                                                      .withOpacity(0.06),
                                             ),
-                                            SizedBox(width: size.width * 0.03),
-                                            Text(
-                                              category['name'],
-                                              style: TextStyle(
+                                            padding: EdgeInsets.all(
+                                                size.width * 0.01),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: SvgPicture.asset(
+                                                category['icon'],
                                                 color: _selectedCategory ==
                                                         category['name']
                                                     ? AppColors.blackColor
-                                                    : Colors.grey,
-                                                fontWeight: FontWeight.bold,
+                                                    : AppColors.darkGreyColor,
+                                                width: size.width * 0.06,
+                                                height: size.width * 0.06,
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          SizedBox(width: size.width * 0.03),
+                                          Text(
+                                            category['name'],
+                                            style: TextStyle(
+                                              color: _selectedCategory ==
+                                                      category['name']
+                                                  ? AppColors.blackColor
+                                                  : Colors.grey,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   );
@@ -298,53 +317,62 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                     onTap: () =>
                                         _selectCategory(category['name']),
                                     child: Container(
+                                      width: double.infinity,
                                       padding: EdgeInsets.symmetric(
-                                        horizontal: size.width * 0.05,
-                                        vertical: size.height * 0.015,
+                                        horizontal: size.width * 0.02,
+                                        vertical: size.height * 0.01,
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: _selectedCategory ==
-                                                        category['name']
-                                                    ? AppColors.yellowColor
-                                                    : AppColors.blackColor
-                                                        .withOpacity(0.06),
-                                              ),
-                                              padding: EdgeInsets.all(
-                                                  size.width * 0.01),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: SvgPicture.asset(
-                                                  category['icon'],
-                                                  color: _selectedCategory ==
-                                                          category['name']
-                                                      ? Colors.white
-                                                      : AppColors.blackColor,
-                                                  width: size.width * 0.06,
-                                                  height: size.width * 0.06,
-                                                ),
-                                              ),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            _selectedCategory ==
+                                                    category['name']
+                                                ? 'assets/icons/circle_check.svg'
+                                                : 'assets/icons/circle.svg',
+                                            width: size.width * 0.06,
+                                            height: size.width * 0.06,
+                                          ),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: _selectedCategory ==
+                                                      category['name']
+                                                  ? AppColors.yellowColor
+                                                  : AppColors.blackColor
+                                                      .withOpacity(0.06),
                                             ),
-                                            SizedBox(width: size.width * 0.03),
-                                            Text(
-                                              category['name'],
-                                              style: TextStyle(
+                                            padding: EdgeInsets.all(
+                                                size.width * 0.01),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: SvgPicture.asset(
+                                                category['icon'],
                                                 color: _selectedCategory ==
                                                         category['name']
                                                     ? AppColors.blackColor
-                                                    : Colors.grey,
-                                                fontWeight: FontWeight.bold,
+                                                    : AppColors.darkGreyColor,
+                                                width: size.width * 0.06,
+                                                height: size.width * 0.06,
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          SizedBox(width: size.width * 0.03),
+                                          Text(
+                                            category['name'],
+                                            style: TextStyle(
+                                              color: _selectedCategory ==
+                                                      category['name']
+                                                  ? AppColors.blackColor
+                                                  : Colors.grey,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   );
@@ -352,7 +380,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.02),
+                    SizedBox(height: size.height * 0.01),
                     ChosenActionButton(
                       text: 'Make an entry',
                       onTap: _saveOperation,

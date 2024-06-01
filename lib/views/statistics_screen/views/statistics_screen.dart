@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
@@ -66,13 +67,17 @@ class _StatisticScreenState extends State<StatisticScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          actions: const [
-            Text(
-              'Statistics',
-              style: SettingsTextStyle.title,
+          centerTitle: true,
+          elevation: 0,
+          title: Text('Statistics'),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: SvgPicture.asset(
+              'assets/icons/leading.svg',
             ),
-          ],
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -209,113 +214,6 @@ class _StatisticScreenState extends State<StatisticScreen> {
                     ),
                   ),
                 ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(5.0),
-                    border:
-                        Border(bottom: BorderSide(color: AppColors.blackColor)),
-                    color: AppColors.lightGreyColor.withOpacity(0.4),
-                  ),
-                  child: Row(
-                    //  mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Your balance',
-                                      style: HomeScreenTextStyle.bannerTitle,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                '\$${_totalAmount().toString()}',
-                                style: HomeScreenTextStyle.bannerIncome,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: size.width * 0.25,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Incomes',
-                                    style: HomeScreenTextStyle.bannerTitle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Spacer(),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                '\$$_totalIncome ',
-                                style: HomeScreenTextStyle.bannerIncome,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Container(
-                        width: size.width * 0.25,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Spendings',
-                                    style: HomeScreenTextStyle.bannerTitle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Spacer(),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                '\$$_totalSpendings ',
-                                style: HomeScreenTextStyle.bannerSpendings,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ],
           ),

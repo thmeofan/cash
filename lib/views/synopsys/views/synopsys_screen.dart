@@ -7,10 +7,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
+import '../../../data/model/news_model.dart';
 import '../../../util/shared_pref_service.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
+import '../../news/views/news_screen.dart';
 import '../../operation/views/constructor_screen.dart';
 import '../../operation/views/finance_screen.dart';
+import '../../statistics_screen/views/statistics_screen.dart';
 
 class SynopsysScreen extends StatefulWidget {
   @override
@@ -207,15 +210,31 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
               ),
             ),
             SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OptionsWidget(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NewsScreen(
+                                  newsModel: news,
+                                )),
+                      );
+                    },
                     icon: 'assets/icons/news.svg',
                     title: 'News',
                     subtitle: '6 news'),
                 SizedBox(width: 10),
                 OptionsWidget(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StatisticScreen()),
+                      );
+                    },
                     icon: 'assets/icons/statistics.svg',
                     title: 'Statistics',
                     subtitle: 'Statistics of your current income and expense.'),

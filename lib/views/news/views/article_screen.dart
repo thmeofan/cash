@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
 
+import '../../../consts/app_text_styles/news_text_style.dart';
 import '../../../consts/app_text_styles/onboarding_text_style.dart';
 import '../../../data/model/news_model.dart';
 
@@ -15,38 +16,26 @@ class ArticleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        //   title: const Text('News', style: OnboardingTextStyle.screenTitle),
-        backgroundColor: AppColors.blackColor,
+        title: Text('News'),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: SvgPicture.asset(
-            'assets/icons/back.svg',
-            width: screenSize.width * 0.1,
-            height: screenSize.width * 0.1,
+            'assets/icons/leading.svg',
           ),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(color: AppColors.blackColor),
         child: Column(
           children: [
             SizedBox(
-              height: screenSize.height * 0.1,
-            ),
-            Text(
-              newsModel.date,
-              // style: NewsTextStyle.date,
-              textAlign: TextAlign.end,
-            ),
-            SizedBox(
-              height: screenSize.height * 0.4,
-              width: screenSize.width * 0.9,
+              height: screenSize.height * 0.35,
+              width: screenSize.width * 0.95,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FancyShimmerImage(
@@ -61,15 +50,30 @@ class ArticleScreen extends StatelessWidget {
                   vertical: screenSize.width * 0.01),
               child: Text(
                 newsModel.title,
-                //  style: NewsTextStyle.articleTitle,
+                style: NewsTextStyle.articleTitle,
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: screenSize.width * 0.04,
+                  ),
+                  child: Text(
+                    newsModel.date,
+                    style: NewsTextStyle.date,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(screenSize.width * 0.04),
                 child: Text(
                   newsModel.text,
-                  //  style: NewsTextStyle.articleText,
+                  style: NewsTextStyle.articleText,
                 ),
               ),
             ),
