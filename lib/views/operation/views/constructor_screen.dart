@@ -86,7 +86,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     final snackBar = SnackBar(
       content: Text(
         message,
-        style: TextStyle(color: AppColors.redColor),
+        style: TextStyle(color: AppColors.yellowColor),
       ),
       backgroundColor: AppColors.lightGreyColor,
     );

@@ -14,6 +14,7 @@ import '../../news/views/news_screen.dart';
 import '../../operation/views/constructor_screen.dart';
 import '../../operation/views/finance_screen.dart';
 import '../../statistics_screen/views/statistics_screen.dart';
+import '../widgets/operation_list_view.dart';
 
 class SynopsysScreen extends StatefulWidget {
   @override
@@ -241,6 +242,9 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
               ],
             ),
             SizedBox(height: 10),
+            Container(
+                height: size.height * 0.4,
+                child: OperationsListView(operations: operations)),
           ],
         ),
       ),
