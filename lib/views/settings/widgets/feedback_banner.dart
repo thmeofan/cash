@@ -12,40 +12,28 @@ class FeedbackBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.blackColor.withOpacity(0.06),
         borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8.0,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
-      child: Column(
+      child: Row(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Give us 5 stars',
-                    style: HomeScreenTextStyle.bannerTitle,
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    'Your feedback helps \nus improve',
-                    style: HomeScreenTextStyle.bannerText,
-                    maxLines: 4,
-                  ),
-                ],
+              const Text(
+                'Give us 5 stars',
+                style: HomeScreenTextStyle.bannerTitle,
               ),
-              const Spacer(),
-              SvgPicture.asset(
-                'assets/images/feedback.svg',
-                fit: BoxFit.cover,
-                width: 130,
+              const SizedBox(height: 4.0),
+              Text(
+                'Your feedback helps \nus improve',
+                style: HomeScreenTextStyle.bannerText,
+                maxLines: 4,
               ),
             ],
+          ),
+          const Spacer(),
+          Image.asset(
+            'assets/images/feedback.png',
+            width: 120,
           ),
         ],
       ),

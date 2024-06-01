@@ -26,6 +26,8 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
     {'name': 'Freelance', 'icon': 'assets/icons/freelance.svg'},
     {'name': 'Business', 'icon': 'assets/icons/business.svg'},
+    {'name': 'Royalty', 'icon': 'assets/icons/royalty.svg'},
+    {'name': 'Passive', 'icon': 'assets/icons/passive.svg'},
   ];
 
   final List<Map<String, dynamic>> _spendingCategories = [
@@ -33,6 +35,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     {'name': 'Food', 'icon': 'assets/icons/food.svg'},
     {'name': 'Transport', 'icon': 'assets/icons/transport.svg'},
     {'name': 'Rest', 'icon': 'assets/icons/rest.svg'},
+    {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
     {'name': 'Investment', 'icon': 'assets/icons/investmentE.svg'},
   ];
 
@@ -151,13 +154,13 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                               ? AppColors.purpleColor
                               : AppColors.lightGreyColor,
                           borderRadius: _isSelected[0]
-                              ? BorderRadius.only(
+                              ? const BorderRadius.only(
                                   topRight: Radius.circular(10.0),
                                   bottomRight: Radius.circular(10.0),
                                   topLeft: Radius.circular(10.0),
                                   bottomLeft: Radius.circular(10.0),
                                 )
-                              : BorderRadius.only(
+                              : const BorderRadius.only(
                                   topRight: Radius.circular(0.0),
                                   bottomRight: Radius.circular(0.0),
                                   topLeft: Radius.circular(10.0),
@@ -182,13 +185,13 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                               ? AppColors.purpleColor
                               : AppColors.lightGreyColor,
                           borderRadius: _isSelected[1]
-                              ? BorderRadius.only(
+                              ? const BorderRadius.only(
                                   topLeft: Radius.circular(10.0),
                                   bottomLeft: Radius.circular(10.0),
                                   topRight: Radius.circular(10.0),
                                   bottomRight: Radius.circular(10.0),
                                 )
-                              : BorderRadius.only(
+                              : const BorderRadius.only(
                                   topLeft: Radius.circular(0.0),
                                   bottomLeft: Radius.circular(0.0),
                                   topRight: Radius.circular(10.0),
@@ -222,7 +225,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                     InputWidget(
                       controller: _amountController,
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                          const TextInputType.numberWithOptions(decimal: true),
                       label: 'Enter amount',
                     ),
                     SizedBox(height: 5),
@@ -242,27 +245,36 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                         horizontal: size.width * 0.05,
                                         vertical: size.height * 0.015,
                                       ),
-                                      decoration: BoxDecoration(
-                                        color: _selectedCategory ==
-                                                category['name']
-                                            ? AppColors.blueColor
-                                            : AppColors.lightGreyColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           // mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            SvgPicture.asset(
-                                              category['icon'],
-                                              color: _selectedCategory ==
-                                                      category['name']
-                                                  ? Colors.white
-                                                  : AppColors.blackColor,
-                                              width: size.width * 0.06,
-                                              height: size.width * 0.06,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: _selectedCategory ==
+                                                        category['name']
+                                                    ? AppColors.yellowColor
+                                                    : AppColors.blackColor
+                                                        .withOpacity(0.06),
+                                              ),
+                                              padding: EdgeInsets.all(
+                                                  size.width * 0.01),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
+                                                child: SvgPicture.asset(
+                                                  category['icon'],
+                                                  color: _selectedCategory ==
+                                                          category['name']
+                                                      ? Colors.white
+                                                      : AppColors.blackColor,
+                                                  width: size.width * 0.06,
+                                                  height: size.width * 0.06,
+                                                ),
+                                              ),
                                             ),
                                             SizedBox(width: size.width * 0.03),
                                             Text(
@@ -270,8 +282,8 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                               style: TextStyle(
                                                 color: _selectedCategory ==
                                                         category['name']
-                                                    ? Colors.white
-                                                    : AppColors.blackColor,
+                                                    ? AppColors.blackColor
+                                                    : Colors.grey,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -290,31 +302,47 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                         horizontal: size.width * 0.05,
                                         vertical: size.height * 0.015,
                                       ),
-                                      decoration: BoxDecoration(
-                                        color: _selectedCategory ==
-                                                category['name']
-                                            ? AppColors.blueColor
-                                            : AppColors.lightGreyColor,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           children: [
-                                            SvgPicture.asset(
-                                              category['icon'],
-                                              color: _selectedCategory ==
-                                                      category['name']
-                                                  ? Colors.white
-                                                  : AppColors.blackColor,
-                                              width: size.width * 0.06,
-                                              height: size.width * 0.06,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: _selectedCategory ==
+                                                        category['name']
+                                                    ? AppColors.yellowColor
+                                                    : AppColors.blackColor
+                                                        .withOpacity(0.06),
+                                              ),
+                                              padding: EdgeInsets.all(
+                                                  size.width * 0.01),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: SvgPicture.asset(
+                                                  category['icon'],
+                                                  color: _selectedCategory ==
+                                                          category['name']
+                                                      ? Colors.white
+                                                      : AppColors.blackColor,
+                                                  width: size.width * 0.06,
+                                                  height: size.width * 0.06,
+                                                ),
+                                              ),
                                             ),
                                             SizedBox(width: size.width * 0.03),
-                                            Text(category['name'],
-                                                style: HomeScreenTextStyle
-                                                    .bannerIncome),
+                                            Text(
+                                              category['name'],
+                                              style: TextStyle(
+                                                color: _selectedCategory ==
+                                                        category['name']
+                                                    ? AppColors.blackColor
+                                                    : Colors.grey,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),

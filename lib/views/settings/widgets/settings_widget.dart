@@ -19,7 +19,7 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 4),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -28,8 +28,7 @@ class SettingsTile extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 assetName,
-                width: 24.0,
-                height: 24.0,
+                width: 32.0,
               ),
               const SizedBox(width: 8.0),
               Text(

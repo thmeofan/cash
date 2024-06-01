@@ -50,7 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Container(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+            padding: EdgeInsets.symmetric(horizontal: 4),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -93,8 +93,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             assetName: 'assets/icons/terms.svg',
                           ),
                           const Divider(
-                            indent: 16,
-                            endIndent: 10,
+                            indent: 4,
+                            endIndent: 8,
                             height: 1.0,
                             thickness: 0.2,
                             color: Colors.grey,
@@ -114,8 +114,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             assetName: 'assets/icons/privacy.svg',
                           ),
                           const Divider(
-                            indent: 16,
-                            endIndent: 10,
+                            indent: 4,
+                            endIndent: 8,
                             height: 1.0,
                             thickness: 0.2,
                             color: Colors.grey,
@@ -135,8 +135,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             assetName: 'assets/icons/support.svg',
                           ),
                           const Divider(
-                            indent: 16,
-                            endIndent: 10,
+                            indent: 4,
+                            endIndent: 8,
                             height: 1.0,
                             thickness: 0.2,
                             color: Colors.grey,
@@ -156,8 +156,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             assetName: 'assets/icons/share.svg',
                           ),
                           const Divider(
-                            indent: 16,
-                            endIndent: 10,
+                            indent: 6,
+                            endIndent: 8,
                             height: 1.0,
                             thickness: 0.2,
                             color: Colors.grey,
@@ -174,7 +174,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               );
                             },
                             action: SvgPicture.asset('assets/icons/arrow.svg'),
-                            assetName: 'assets/icons/subscription.svg',
+                            assetName: 'assets/icons/subscriprion.svg',
                           ),
                         ],
                       ),

@@ -21,18 +21,10 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final CarouselController _carouselController = CarouselController();
-  int _current = 0;
 
   void _onActionButtonTap() {
-    if (_current == 0) {
-      _carouselController.nextPage(
-        duration: Duration(milliseconds: 300),
-        curve: Curves.linear,
-      );
-    } else {
-      context.read<OnboardingCubit>().setFirstTime();
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
-    }
+    context.read<OnboardingCubit>().setFirstTime();
+    Navigator.pushReplacementNamed(context, AppRoutes.home);
   }
 
   @override
@@ -48,11 +40,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Expanded(
               child: CarouselSlider(
                 items: const [
-                  IntroductionSVGWidget(
-                    imagePath: 'assets/images/onboarding1.svg',
-                  ),
-                  IntroductionSVGWidget(
-                    imagePath: 'assets/images/onboarding2.svg',
+                  IntroductionPNGWidget(
+                    imagePath: 'assets/images/onboarding1.png',
                   ),
                 ],
                 carouselController: _carouselController,
@@ -61,9 +50,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   autoPlay: false,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
+                    setState(() {});
                   },
                 ),
               ),
@@ -84,14 +71,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     SizedBox(
                       height: size.height * 0.01,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
                           child: Text(
-                            _current == 0
-                                ? 'Your Personal Financial Assistant'
-                                : 'Everything You Need -vAll in One App',
+                            'Manage your finances easily and conveniently',
                             style: OnboardingTextStyle.introduction,
                             textAlign: TextAlign.center,
                             softWrap: true,
@@ -106,17 +91,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Flexible(
                         child: Text(
-                          _current == 0
-                              ? 'This mobile app will help you easily and effectively manage your personal finances.'
-                              : 'Track your income and expenses, plan your budget, and get up-to-date information on currency and cryptocurrency exchange rates.',
+                          'A mobile app for planning and tracking your expenses.',
                           style: OnboardingTextStyle.description,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ]),
                     const Spacer(),
                     ChosenActionButton(
                       onTap: _onActionButtonTap,
-                      text: 'Next',
+                      text: 'Get started',
                     ),
                     SizedBox(
                       height: size.height * 0.035,

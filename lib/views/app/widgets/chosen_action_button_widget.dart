@@ -8,7 +8,7 @@ class ChosenActionButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.onTap,
-    this.backgroundColor = AppColors.purpleColor,
+    this.backgroundColor = AppColors.yellowColor,
   }) : super(key: key);
 
   final String text;
@@ -20,7 +20,7 @@ class ChosenActionButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(
-        top: size.width * 0.08,
+        top: size.width * 0.04,
         left: size.width * 0.02,
         right: size.width * 0.02,
       ),

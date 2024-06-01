@@ -11,7 +11,7 @@ class OnboardingTextStyle {
       fontFamily: 'Roboto',
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
-      color: Colors.black);
+      color: Colors.black.withOpacity(0.4));
   static const TextStyle title = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18.0,
@@ -28,6 +28,6 @@ class OnboardingTextStyle {
     fontFamily: 'Roboto',
     fontSize: 17.0,
     fontWeight: FontWeight.w500,
-    color: Colors.white,
+    color: Colors.black,
   );
 }

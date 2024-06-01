@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: AppColors.whiteColor,
-        selectedItemColor: AppColors.orangeColor,
+        selectedItemColor: AppColors.yellowColor,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedLabelStyle: const TextStyle(// color: AppColors.lightBlueColor,

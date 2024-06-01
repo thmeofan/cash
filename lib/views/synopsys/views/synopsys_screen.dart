@@ -1,3 +1,5 @@
+import 'package:cash/views/settings/views/settings_screen.dart';
+import 'package:cash/views/synopsys/widgets/options_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +11,6 @@ import '../../../util/shared_pref_service.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
 import '../../operation/views/constructor_screen.dart';
 import '../../operation/views/finance_screen.dart';
-import '../widgets/currency_container.dart';
 
 class SynopsysScreen extends StatefulWidget {
   @override
@@ -61,19 +62,26 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
         actions: [
-          TextButton(
+          IconButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => HistoryScreen(
-                            operations: operations,
-                          )),
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
                 );
               },
-              child: Text('History'))
+              icon: SvgPicture.asset('assets/icons/settings.svg')),
+          // TextButton(
+          //     onPressed: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => HistoryScreen(
+          //                   operations: operations,
+          //                 )),
+          //       );
+          //     },
+          //     child: Text('History'))
         ],
       ),
       body: Center(
@@ -83,51 +91,42 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(5.0),
-                  border:
-                      Border(bottom: BorderSide(color: AppColors.blackColor)),
-                  color: AppColors.lightGreyColor.withOpacity(0.4),
-                ),
-                child: Row(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Column(
                   //  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Your balance',
-                                    style: HomeScreenTextStyle.bannerTitle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Spacer(),
-                                ],
-                              ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 6.0,
                             ),
-                            SizedBox(
-                              height: 8,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Balance',
+                                  style: HomeScreenTextStyle.incomeBannerTitle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
-                            Text(
-                              '\$${_totalAmount().toString()}',
-                              style: HomeScreenTextStyle.bannerIncome,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            '\$${_totalAmount().toString()}',
+                            style: HomeScreenTextStyle.bannerIncome,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                     Container(
-                      width: size.width * 0.25,
+                      //  width: size.width * 0.25,
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Column(
@@ -136,27 +135,30 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                               children: [
                                 Text(
                                   'Income',
-                                  style: HomeScreenTextStyle.bannerTitle,
+                                  style: HomeScreenTextStyle.incomeBannerTitle,
                                   textAlign: TextAlign.center,
                                 ),
                                 Spacer(),
+                                Text(
+                                  '\$$_totalIncome ',
+                                  style: HomeScreenTextStyle.bannerIncome,
+                                  textAlign: TextAlign.center,
+                                ),
                               ],
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              '\$$_totalIncome ',
-                              style: HomeScreenTextStyle.bannerIncome,
-                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const Divider(
+                      indent: 6,
+                      endIndent: 8,
+                      height: 1.0,
+                      thickness: 0.2,
+                      color: Colors.grey,
+                    ),
                     Container(
-                      width: size.width * 0.25,
+                      //   width: size.width * 0.25,
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Column(
@@ -165,186 +167,61 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                               children: [
                                 Text(
                                   'Expense',
-                                  style: HomeScreenTextStyle.bannerTitle,
+                                  style: HomeScreenTextStyle.incomeBannerTitle,
                                   textAlign: TextAlign.center,
                                 ),
                                 Spacer(),
+                                Text(
+                                  '\$$_totalSpendings ',
+                                  style: HomeScreenTextStyle.bannerSpendings,
+                                  textAlign: TextAlign.center,
+                                ),
                               ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              '\$$_totalSpendings ',
-                              style: HomeScreenTextStyle.bannerSpendings,
-                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
                       ),
                     ),
+                    const Divider(
+                      indent: 6,
+                      endIndent: 8,
+                      height: 1.0,
+                      thickness: 0.2,
+                      color: Colors.grey,
+                    ),
+                    ChosenActionButton(
+                      text: 'Refill balance',
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConstructorScreen()),
+                        );
+                        if (result != null) {
+                          _addOperation(result);
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
             ),
-            CurrencyConverter(),
             SizedBox(height: 10),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: size.width * 0.46,
-                  height: size.height * 0.17,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.purpleColor.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset('assets/icons/usdt.svg'),
-                          Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'USDT',
-                                style: HomeScreenTextStyle.titleName,
-                              ),
-                              Text(
-                                'Tether',
-                                style: HomeScreenTextStyle.titleDate,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '\$1,00',
-                            style: HomeScreenTextStyle.titleName,
-                          ),
-                          Text(
-                            '0.00%',
-                            style: HomeScreenTextStyle.titleDate,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                OptionsWidget(
+                    icon: 'assets/icons/news.svg',
+                    title: 'News',
+                    subtitle: '6 news'),
                 SizedBox(width: 10),
-                Container(
-                  width: size.width * 0.46,
-                  height: size.height * 0.17,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: AppColors.purpleColor.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset('assets/icons/btc.svg'),
-                          Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'BTC',
-                                style: HomeScreenTextStyle.titleName,
-                              ),
-                              Text(
-                                'Bitcoin',
-                                style: HomeScreenTextStyle.titleDate,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '\$69 824,30',
-                            style: HomeScreenTextStyle.titleName,
-                          ),
-                          Text(
-                            '0.45%',
-                            style: HomeScreenTextStyle.titleDate,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                OptionsWidget(
+                    icon: 'assets/icons/statistics.svg',
+                    title: 'Statistics',
+                    subtitle: 'Statistics of your current income and expense.'),
               ],
             ),
             SizedBox(height: 10),
-            Container(
-              width: size.width * 0.95,
-              height: size.height * 0.09,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.purpleColor.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SvgPicture.asset('assets/icons/eth.svg'),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'ETH',
-                        style: HomeScreenTextStyle.titleName,
-                      ),
-                      Text(
-                        'Ethereum',
-                        style: HomeScreenTextStyle.titleDate,
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '\$3763,45',
-                        style: HomeScreenTextStyle.titleName,
-                      ),
-                      Text(
-                        '0.68%',
-                        style: HomeScreenTextStyle.titleDate,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            ChosenActionButton(
-              text: 'Add income/expense',
-              onTap: () async {
-                final result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ConstructorScreen()),
-                );
-                if (result != null) {
-                  _addOperation(result);
-                }
-              },
-            )
           ],
         ),
       ),

@@ -4,8 +4,8 @@ import '../app_colors.dart';
 class HomeScreenTextStyle {
   static const TextStyle bannerIncome = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 20.0,
-    fontWeight: FontWeight.w400,
+    fontSize: 22.0,
+    fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
   );
   static TextStyle bannerSpendings = TextStyle(
@@ -17,13 +17,19 @@ class HomeScreenTextStyle {
   static const TextStyle bannerTitle = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18.0,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
+  );
+  static TextStyle incomeBannerTitle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 18.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor.withOpacity(0.4),
   );
   static TextStyle bannerText = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 16.0,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w400,
     color: AppColors.blackColor.withOpacity(0.4),
   );
   static const TextStyle name = TextStyle(
@@ -35,12 +41,12 @@ class HomeScreenTextStyle {
       fontFamily: 'Roboto',
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
-      color: AppColors.whiteColor);
+      color: AppColors.blackColor);
   static TextStyle titleDate = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 14.0,
       fontWeight: FontWeight.w300,
-      color: AppColors.whiteColor.withOpacity(0.5));
+      color: AppColors.blackColor.withOpacity(0.4));
   static const TextStyle typeBad = TextStyle(
       fontFamily: 'Roboto',
       fontSize: 18.0,
