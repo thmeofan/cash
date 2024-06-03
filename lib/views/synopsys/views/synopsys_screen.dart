@@ -76,48 +76,48 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Column(
-                  //  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6.0,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Column(
+                    //  mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Balance',
+                                    style:
+                                        HomeScreenTextStyle.incomeBannerTitle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
                             ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Balance',
-                                  style: HomeScreenTextStyle.incomeBannerTitle,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                            const SizedBox(
+                              height: 4,
                             ),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            '\$${_totalAmount().toString()}',
-                            style: HomeScreenTextStyle.bannerIncome,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                            Text(
+                              '\$${_totalAmount().toString()}',
+                              style: HomeScreenTextStyle.bannerIncome,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      //  width: size.width * 0.25,
-                      child: Padding(
+                      Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Column(
                           children: [
@@ -139,17 +139,14 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                           ],
                         ),
                       ),
-                    ),
-                    const Divider(
-                      indent: 6,
-                      endIndent: 8,
-                      height: 1.0,
-                      thickness: 0.2,
-                      color: Colors.grey,
-                    ),
-                    Container(
-                      //   width: size.width * 0.25,
-                      child: Padding(
+                      const Divider(
+                        indent: 6,
+                        endIndent: 8,
+                        height: 1.0,
+                        thickness: 0.2,
+                        color: Colors.grey,
+                      ),
+                      Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Column(
                           children: [
@@ -160,7 +157,7 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                                   style: HomeScreenTextStyle.incomeBannerTitle,
                                   textAlign: TextAlign.center,
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   '\$$_totalSpendings ',
                                   style: HomeScreenTextStyle.bannerSpendings,
@@ -171,67 +168,68 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                           ],
                         ),
                       ),
-                    ),
-                    const Divider(
-                      indent: 6,
-                      endIndent: 8,
-                      height: 1.0,
-                      thickness: 0.2,
-                      color: Colors.grey,
-                    ),
-                    ChosenActionButton(
-                      text: 'Refill balance',
-                      onTap: () async {
-                        final result = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ConstructorScreen()),
-                        );
-                        if (result != null) {
-                          _addOperation(result);
-                        }
-                      },
-                    ),
-                  ],
+                      const Divider(
+                        indent: 6,
+                        endIndent: 8,
+                        height: 1.0,
+                        thickness: 0.2,
+                        color: Colors.grey,
+                      ),
+                      ChosenActionButton(
+                        text: 'Refill balance',
+                        onTap: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConstructorScreen()),
+                          );
+                          if (result != null) {
+                            _addOperation(result);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OptionsWidget(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NewsScreen(
-                                  newsModel: news,
-                                )),
-                      );
-                    },
-                    icon: 'assets/icons/news.svg',
-                    title: 'News',
-                    subtitle: '6 news'),
-                SizedBox(width: 10),
-                OptionsWidget(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => StatisticScreen()),
-                      );
-                    },
-                    icon: 'assets/icons/statistics.svg',
-                    title: 'Statistics',
-                    subtitle: 'Statistics of your current income and expense.'),
-              ],
-            ),
-            SizedBox(height: 10),
-            Container(
-                height: size.height * 0.4,
-                child: OperationsListView(operations: operations)),
-          ],
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OptionsWidget(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewsScreen(
+                                    newsModel: news,
+                                  )),
+                        );
+                      },
+                      icon: 'assets/icons/news.svg',
+                      title: 'News',
+                      subtitle: '6 news'),
+                  const SizedBox(width: 10),
+                  OptionsWidget(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StatisticScreen()),
+                        );
+                      },
+                      icon: 'assets/icons/statistics.svg',
+                      title: 'Statistics',
+                      subtitle:
+                          'Statistics of your current income and expense.'),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                  height: size.height * 0.4,
+                  child: OperationsListView(operations: operations)),
+            ],
+          ),
         ),
       ),
     );

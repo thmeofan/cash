@@ -10,15 +10,14 @@ import 'category_icon.dart';
 class OperationsListView extends StatefulWidget {
   final List<Map<String, dynamic>> operations;
 
-  const OperationsListView({Key? key, required this.operations})
-      : super(key: key);
+  const OperationsListView({super.key, required this.operations});
 
   @override
   _OperationsListViewState createState() => _OperationsListViewState();
 }
 
 class _OperationsListViewState extends State<OperationsListView> {
-  int _selectedIndex = 0; // 0 = All, 1 = Income, 2 = Spendings
+  int _selectedIndex = 0;
 
   List<Map<String, dynamic>> get _filteredOperations {
     if (_selectedIndex == 0) {
@@ -43,7 +42,7 @@ class _OperationsListViewState extends State<OperationsListView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'History',
                 style: HomeScreenTextStyle.titleName,
               ),
@@ -96,9 +95,9 @@ class _OperationsListViewState extends State<OperationsListView> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 1,
                                       blurRadius: 3,
-                                      offset: Offset(0, 2),
+                                      offset: const Offset(0, 2),
                                     )
-                                  : BoxShadow(color: Colors.transparent),
+                                  : const BoxShadow(color: Colors.transparent),
                             ],
                           ),
                           child: const Center(
@@ -140,9 +139,9 @@ class _OperationsListViewState extends State<OperationsListView> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 1,
                                       blurRadius: 3,
-                                      offset: Offset(0, 2),
+                                      offset: const Offset(0, 2),
                                     )
-                                  : BoxShadow(color: Colors.transparent),
+                                  : const BoxShadow(color: Colors.transparent),
                             ],
                           ),
                           child: const Center(
@@ -184,9 +183,9 @@ class _OperationsListViewState extends State<OperationsListView> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 1,
                                       blurRadius: 3,
-                                      offset: Offset(0, 2),
+                                      offset: const Offset(0, 2),
                                     )
-                                  : BoxShadow(color: Colors.transparent),
+                                  : const BoxShadow(color: Colors.transparent),
                             ],
                           ),
                           child: const Center(
@@ -223,10 +222,10 @@ class _OperationsListViewState extends State<OperationsListView> {
                   width: 24.0,
                   height: 24.0,
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 const Text('Your balance is empty',
                     style: WidgetTextStyle.title),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                     'Add Expenses or Income so you can track your financial spending.',
                     style: WidgetTextStyle.subtitle),
@@ -243,7 +242,6 @@ class _OperationsListViewState extends State<OperationsListView> {
                 final amount = operation['amount'];
                 final type = operation['type'];
 
-                // Get the category icon path
                 final categoryIconPath =
                     CategoryIcon.getIconPath(categoryName, type);
 

@@ -1,10 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../consts/app_colors.dart';
-
 import '../../../consts/app_text_styles/news_text_style.dart';
-import '../../../consts/app_text_styles/onboarding_text_style.dart';
 import '../../../data/model/news_model.dart';
 
 class ArticleScreen extends StatelessWidget {
@@ -19,7 +16,7 @@ class ArticleScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        title: Text('News'),
+        title: const Text('News'),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();

@@ -22,9 +22,9 @@ class OptionsWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: size.width * 0.46,
-        height: size.height * 0.15,
-        padding: EdgeInsets.all(10),
+        width: size.width * 0.4,
+        height: size.height * 0.17,
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.blackColor.withOpacity(0.06),
           borderRadius: BorderRadius.circular(10),
@@ -33,10 +33,10 @@ class OptionsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 4,
+              height: 2,
             ),
             SvgPicture.asset(icon),
-            Spacer(),
+            const Spacer(),
             Text(
               title,
               style: HomeScreenTextStyle.titleName,
@@ -46,6 +46,8 @@ class OptionsWidget extends StatelessWidget {
             ),
             Text(
               subtitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: HomeScreenTextStyle.titleDate,
             )
           ],

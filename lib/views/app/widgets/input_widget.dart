@@ -30,7 +30,7 @@ class InputWidget extends StatelessWidget {
         height: size.height * 0.06,
         decoration: BoxDecoration(
           color: AppColors.lightGreyColor,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: TextField(
           style: ConstructorTextStyle.inputText,

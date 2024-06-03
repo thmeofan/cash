@@ -88,9 +88,9 @@ class _OperationsByCategoryListViewState
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 1,
                                 blurRadius: 3,
-                                offset: Offset(0, 2),
+                                offset: const Offset(0, 2),
                               )
-                            : BoxShadow(color: Colors.transparent),
+                            : const BoxShadow(color: Colors.transparent),
                       ],
                     ),
                     child: const Center(
@@ -132,9 +132,9 @@ class _OperationsByCategoryListViewState
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 1,
                                 blurRadius: 3,
-                                offset: Offset(0, 2),
+                                offset: const Offset(0, 2),
                               )
-                            : BoxShadow(color: Colors.transparent),
+                            : const BoxShadow(color: Colors.transparent),
                       ],
                     ),
                     child: const Center(
@@ -168,9 +168,9 @@ class _OperationsByCategoryListViewState
                   width: 24.0,
                   height: 24.0,
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 const Text('Sorry, no info yet', style: WidgetTextStyle.title),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text('Add some operations', style: WidgetTextStyle.subtitle),
               ],
             ),
@@ -194,7 +194,6 @@ class _OperationsByCategoryListViewState
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    //  height: size.height * 0.15,
                     decoration: BoxDecoration(
                       color: AppColors.lightGreyColor,
                       borderRadius: BorderRadius.circular(10),
@@ -211,9 +210,9 @@ class _OperationsByCategoryListViewState
                                   height: 24.0,
                                 )
                               : const SizedBox.shrink(),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(category, style: WidgetTextStyle.subtitle),
-                          SizedBox(height: 2),
+                          const SizedBox(height: 2),
                           Text('\$ $totalAmount', style: WidgetTextStyle.title),
                         ],
                       ),

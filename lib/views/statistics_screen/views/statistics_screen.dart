@@ -1,14 +1,10 @@
-import 'dart:math';
 import 'package:cash/views/statistics_screen/widgets/operations_by_category_list_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
-import '../../../consts/app_text_styles/settings_text_style.dart';
-
 import '../../../util/shared_pref_service.dart';
-import '../widgets/period_data.dart';
 
 class StatisticScreen extends StatefulWidget {
   @override
@@ -65,7 +61,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
       labels.add(
         Text(
           labelTexts[i],
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
@@ -143,296 +139,301 @@ class _StatisticScreenState extends State<StatisticScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6.0,
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Balance',
-                                style: HomeScreenTextStyle.incomeBannerTitle,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          '\$${_totalAmount.toString()}',
-                          style: HomeScreenTextStyle.bannerSpendings,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.lightGreyColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    height: size.height * 0.045,
-                    width: size.width * 0.6,
-                    child: Center(
-                      child: ToggleButtons(
-                        renderBorder: false,
-                        fillColor: Colors.transparent,
-                        isSelected: [
-                          selectedPeriod == 'today',
-                          selectedPeriod == 'week',
-                          selectedPeriod == 'month'
-                        ],
-                        onPressed: (int index) {
-                          setState(() {
-                            selectedPeriod = index == 0
-                                ? 'today'
-                                : index == 1
-                                    ? 'week'
-                                    : 'month';
-                          });
-                        },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Container(
-                              width: size.width * 0.18,
-                              height: size.height * 0.04,
-                              decoration: BoxDecoration(
-                                color: selectedPeriod == 'today'
-                                    ? Colors.white
-                                    : Colors.transparent,
-                                borderRadius: selectedPeriod == 'today'
-                                    ? const BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0),
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0),
-                                      )
-                                    : const BorderRadius.only(
-                                        topRight: Radius.circular(0.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0),
-                                      ),
-                                boxShadow: [
-                                  selectedPeriod == 'today'
-                                      ? BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 3,
-                                          offset: Offset(0, 2),
-                                        )
-                                      : BoxShadow(color: Colors.transparent),
-                                ],
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Today',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
-                                  ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6.0,
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Balance',
+                                  style: HomeScreenTextStyle.incomeBannerTitle,
+                                  textAlign: TextAlign.center,
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Container(
-                              width: size.width * 0.18,
-                              height: size.height * 0.04,
-                              decoration: BoxDecoration(
-                                color: selectedPeriod == 'week'
-                                    ? Colors.white
-                                    : Colors.transparent,
-                                borderRadius: selectedPeriod == 'week'
-                                    ? const BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0),
-                                      )
-                                    : const BorderRadius.only(
-                                        topLeft: Radius.circular(0.0),
-                                        bottomLeft: Radius.circular(0.0),
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0),
-                                      ),
-                                boxShadow: [
-                                  selectedPeriod == 'week'
-                                      ? BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 3,
-                                          offset: Offset(0, 2),
-                                        )
-                                      : BoxShadow(color: Colors.transparent),
-                                ],
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Week',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          const SizedBox(
+                            height: 4,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Container(
-                              width: size.width * 0.18,
-                              height: size.height * 0.04,
-                              decoration: BoxDecoration(
-                                color: selectedPeriod == 'month'
-                                    ? Colors.white
-                                    : Colors.transparent,
-                                borderRadius: selectedPeriod == 'month'
-                                    ? const BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0),
-                                      )
-                                    : const BorderRadius.only(
-                                        topLeft: Radius.circular(0.0),
-                                        bottomLeft: Radius.circular(0.0),
-                                        topRight: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(10.0),
-                                      ),
-                                boxShadow: [
-                                  selectedPeriod == 'month'
-                                      ? BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 3,
-                                          offset: Offset(0, 2),
-                                        )
-                                      : BoxShadow(color: Colors.transparent),
-                                ],
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Month',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          Text(
+                            '\$${_totalAmount.toString()}',
+                            style: HomeScreenTextStyle.bannerSpendings,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 190,
-                  child: BarChart(
-                    BarChartData(
-                      alignment: BarChartAlignment.spaceEvenly,
-                      maxY: _totalAmount * 1.5,
-                      gridData: const FlGridData(
-                          drawHorizontalLine: true, drawVerticalLine: false),
-                      borderData: FlBorderData(show: false),
-                      titlesData: FlTitlesData(show: false),
-                      barGroups: _getBarGroups(),
-                    ),
-                  ),
-                ),
-              ),
-              Wrap(
-                spacing: 20.0,
-                runSpacing: 10.0,
-                children: _getBarLabels(),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Income',
-                          style: HomeScreenTextStyle.incomeBannerTitle,
-                          textAlign: TextAlign.center,
+                    const Spacer(),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.lightGreyColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      height: size.height * 0.045,
+                      width: size.width * 0.6,
+                      child: Center(
+                        child: ToggleButtons(
+                          renderBorder: false,
+                          fillColor: Colors.transparent,
+                          isSelected: [
+                            selectedPeriod == 'today',
+                            selectedPeriod == 'week',
+                            selectedPeriod == 'month'
+                          ],
+                          onPressed: (int index) {
+                            setState(() {
+                              selectedPeriod = index == 0
+                                  ? 'today'
+                                  : index == 1
+                                      ? 'week'
+                                      : 'month';
+                            });
+                          },
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                width: size.width * 0.18,
+                                height: size.height * 0.04,
+                                decoration: BoxDecoration(
+                                  color: selectedPeriod == 'today'
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  borderRadius: selectedPeriod == 'today'
+                                      ? const BorderRadius.only(
+                                          topRight: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0),
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0),
+                                        )
+                                      : const BorderRadius.only(
+                                          topRight: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0),
+                                        ),
+                                  boxShadow: [
+                                    selectedPeriod == 'today'
+                                        ? BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                            offset: const Offset(0, 2),
+                                          )
+                                        : const BoxShadow(
+                                            color: Colors.transparent),
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Today',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                width: size.width * 0.18,
+                                height: size.height * 0.04,
+                                decoration: BoxDecoration(
+                                  color: selectedPeriod == 'week'
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  borderRadius: selectedPeriod == 'week'
+                                      ? const BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0),
+                                          topRight: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0),
+                                        )
+                                      : const BorderRadius.only(
+                                          topLeft: Radius.circular(0.0),
+                                          bottomLeft: Radius.circular(0.0),
+                                          topRight: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0),
+                                        ),
+                                  boxShadow: [
+                                    selectedPeriod == 'week'
+                                        ? BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                            offset: const Offset(0, 2),
+                                          )
+                                        : const BoxShadow(
+                                            color: Colors.transparent),
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Week',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                width: size.width * 0.18,
+                                height: size.height * 0.04,
+                                decoration: BoxDecoration(
+                                  color: selectedPeriod == 'month'
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  borderRadius: selectedPeriod == 'month'
+                                      ? const BorderRadius.only(
+                                          topLeft: Radius.circular(10.0),
+                                          bottomLeft: Radius.circular(10.0),
+                                          topRight: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0),
+                                        )
+                                      : const BorderRadius.only(
+                                          topLeft: Radius.circular(0.0),
+                                          bottomLeft: Radius.circular(0.0),
+                                          topRight: Radius.circular(10.0),
+                                          bottomRight: Radius.circular(10.0),
+                                        ),
+                                  boxShadow: [
+                                    selectedPeriod == 'month'
+                                        ? BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                            offset: const Offset(0, 2),
+                                          )
+                                        : const BoxShadow(
+                                            color: Colors.transparent),
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Month',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Spacer(),
-                        Text(
-                          '\$$_totalIncome ',
-                          style: HomeScreenTextStyle.bannerSpendings,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-              const Divider(
-                indent: 6,
-                endIndent: 8,
-                height: 1.0,
-                thickness: 0.2,
-                color: Colors.grey,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Expense',
-                          style: HomeScreenTextStyle.incomeBannerTitle,
-                          textAlign: TextAlign.center,
-                        ),
-                        Spacer(),
-                        Text(
-                          '\$$_totalSpendings ',
-                          style: HomeScreenTextStyle.bannerSpendings,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                const SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 190,
+                    child: BarChart(
+                      BarChartData(
+                        alignment: BarChartAlignment.spaceEvenly,
+                        maxY: _totalAmount * 1.5,
+                        gridData: const FlGridData(
+                            drawHorizontalLine: true, drawVerticalLine: false),
+                        borderData: FlBorderData(show: false),
+                        titlesData: const FlTitlesData(show: false),
+                        barGroups: _getBarGroups(),
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              const Divider(
-                indent: 6,
-                endIndent: 8,
-                height: 1.0,
-                thickness: 0.2,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                  height: size.height * 0.37,
-                  child: OperationsByCategoryListView(
-                    operations: operations,
-                  )),
-            ],
+                Wrap(
+                  spacing: 20.0,
+                  runSpacing: 10.0,
+                  children: _getBarLabels(),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Income',
+                            style: HomeScreenTextStyle.incomeBannerTitle,
+                            textAlign: TextAlign.center,
+                          ),
+                          Spacer(),
+                          Text(
+                            '\$$_totalIncome ',
+                            style: HomeScreenTextStyle.bannerSpendings,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  indent: 6,
+                  endIndent: 8,
+                  height: 1.0,
+                  thickness: 0.2,
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Expense',
+                            style: HomeScreenTextStyle.incomeBannerTitle,
+                            textAlign: TextAlign.center,
+                          ),
+                          const Spacer(),
+                          Text(
+                            '\$$_totalSpendings ',
+                            style: HomeScreenTextStyle.bannerSpendings,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  indent: 6,
+                  endIndent: 8,
+                  height: 1.0,
+                  thickness: 0.2,
+                  color: Colors.grey,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                    height: size.height * 0.37,
+                    child: OperationsByCategoryListView(
+                      operations: operations,
+                    )),
+              ],
+            ),
           ),
         ));
   }

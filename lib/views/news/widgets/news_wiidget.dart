@@ -1,8 +1,6 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../consts/app_colors.dart';
-
 import '../../../consts/app_text_styles/news_text_style.dart';
 import '../../../data/model/news_model.dart';
 import '../../../util/app_routes.dart';
