@@ -16,7 +16,6 @@ class ArticleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,

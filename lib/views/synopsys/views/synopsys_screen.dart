@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
 import '../../../data/model/news_model.dart';
 import '../../../util/shared_pref_service.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
 import '../../news/views/news_screen.dart';
 import '../../operation/views/constructor_screen.dart';
-import '../../operation/views/finance_screen.dart';
 import '../../statistics_screen/views/statistics_screen.dart';
 import '../widgets/operation_list_view.dart';
 
@@ -93,7 +91,7 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 6.0,
                             ),
                             child: Column(
@@ -107,7 +105,7 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 8,
+                            height: 4,
                           ),
                           Text(
                             '\$${_totalAmount().toString()}',
@@ -133,7 +131,7 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                                 Spacer(),
                                 Text(
                                   '\$$_totalIncome ',
-                                  style: HomeScreenTextStyle.bannerIncome,
+                                  style: HomeScreenTextStyle.bannerSpendings,
                                   textAlign: TextAlign.center,
                                 ),
                               ],

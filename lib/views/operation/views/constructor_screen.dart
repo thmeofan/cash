@@ -1,6 +1,7 @@
 import 'package:cash/consts/app_text_styles/constructor_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../consts/app_colors.dart';
@@ -107,25 +108,17 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        titleSpacing: -5,
         title: const Text(
-          'Back',
+          'Refill balance',
           style: SettingsTextStyle.back,
         ),
-        actions: [
-          Text(
-            'Add your info',
-            style: SettingsTextStyle.title,
-          ),
-        ],
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: SvgPicture.asset(
             'assets/icons/leading.svg',
-            width: size.width * 0.06,
-            height: size.width * 0.06,
           ),
         ),
       ),
@@ -135,77 +128,113 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: ToggleButtons(
-                  isSelected: _isSelected,
-                  onPressed: _toggleOperationType,
-                  borderRadius: BorderRadius.circular(5.0),
-                  selectedColor: AppColors.lightGreyColor,
-                  fillColor: AppColors.lightGreyColor,
-                  renderBorder: false,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.14,
-                          vertical: size.height * 0.012),
-                      decoration: BoxDecoration(
-                          color: _isSelected[0]
-                              ? AppColors.purpleColor
-                              : AppColors.lightGreyColor,
-                          borderRadius: _isSelected[0]
-                              ? const BorderRadius.only(
-                                  topRight: Radius.circular(10.0),
-                                  bottomRight: Radius.circular(10.0),
-                                  topLeft: Radius.circular(10.0),
-                                  bottomLeft: Radius.circular(10.0),
-                                )
-                              : const BorderRadius.only(
-                                  topRight: Radius.circular(0.0),
-                                  bottomRight: Radius.circular(0.0),
-                                  topLeft: Radius.circular(10.0),
-                                  bottomLeft: Radius.circular(10.0),
-                                )),
-                      child: Text(
-                        'Income',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: _isSelected[0]
-                              ? Colors.white.withOpacity(0.35)
-                              : Colors.black,
+                child: Container(
+                  height: size.height * 0.07,
+                  width: size.width * 0.95,
+                  decoration: BoxDecoration(
+                      color: AppColors.lightGreyColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: ToggleButtons(
+                      isSelected: _isSelected,
+                      onPressed: _toggleOperationType,
+                      borderRadius: BorderRadius.circular(5.0),
+                      fillColor: Colors.transparent,
+                      renderBorder: false,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            width: size.width * 0.45,
+                            height: size.height * 0.06,
+                            decoration: BoxDecoration(
+                              color: _isSelected[0]
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              borderRadius: _isSelected[0]
+                                  ? const BorderRadius.only(
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0),
+                                      topLeft: Radius.circular(10.0),
+                                      bottomLeft: Radius.circular(10.0),
+                                    )
+                                  : const BorderRadius.only(
+                                      topRight: Radius.circular(0.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(10.0),
+                                      bottomLeft: Radius.circular(10.0),
+                                    ),
+                              boxShadow: [
+                                _isSelected[0]
+                                    ? BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 3,
+                                        offset: Offset(0, 2),
+                                      )
+                                    : BoxShadow(color: Colors.transparent),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Income',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.125,
-                          vertical: size.height * 0.012),
-                      decoration: BoxDecoration(
-                          color: _isSelected[1]
-                              ? AppColors.purpleColor
-                              : AppColors.lightGreyColor,
-                          borderRadius: _isSelected[1]
-                              ? const BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  bottomLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0),
-                                  bottomRight: Radius.circular(10.0),
-                                )
-                              : const BorderRadius.only(
-                                  topLeft: Radius.circular(0.0),
-                                  bottomLeft: Radius.circular(0.0),
-                                  topRight: Radius.circular(10.0),
-                                  bottomRight: Radius.circular(10.0),
-                                )),
-                      child: Text(
-                        'Spendings',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: _isSelected[1]
-                              ? Colors.white.withOpacity(0.35)
-                              : Colors.black,
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            width: size.width * 0.45,
+                            height: size.height * 0.06,
+                            decoration: BoxDecoration(
+                              color: _isSelected[1]
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              borderRadius: _isSelected[1]
+                                  ? const BorderRadius.only(
+                                      topLeft: Radius.circular(10.0),
+                                      bottomLeft: Radius.circular(10.0),
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0),
+                                    )
+                                  : const BorderRadius.only(
+                                      topLeft: Radius.circular(0.0),
+                                      bottomLeft: Radius.circular(0.0),
+                                      topRight: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0),
+                                    ),
+                              boxShadow: [
+                                _isSelected[1]
+                                    ? BoxShadow(
+                                        color: Colors.grey.withOpacity(
+                                            0.5), // Shadow color and opacity
+                                        spreadRadius:
+                                            1, // How far the shadow should spread
+                                        blurRadius: 3, // Soften the shadow
+                                        offset: Offset(0, 2), // Shadow position
+                                      )
+                                    : BoxShadow(color: Colors.transparent),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Spendings',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -216,14 +245,14 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         'Amount (\$)',
                         style: ConstructorTextStyle.subtitle,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     InputWidget(
                       controller: _amountController,
                       keyboardType:
@@ -232,9 +261,9 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                           ? 'Income Amount'
                           : 'Expense Amount',
                     ),
-                    SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    const SizedBox(height: 8),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         'Expense category',
                         style: ConstructorTextStyle.subtitle,
@@ -267,7 +296,7 @@ class _ConstructorScreenState extends State<ConstructorScreen> {
                                             width: size.width * 0.06,
                                             height: size.width * 0.06,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 7,
                                           ),
                                           Container(

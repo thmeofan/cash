@@ -30,6 +30,6 @@ class SettingsTextStyle {
     fontFamily: 'Roboto',
     fontSize: 16.0,
     fontWeight: FontWeight.w300,
-    color: AppColors.purpleColor,
+    color: AppColors.blackColor,
   );
 }

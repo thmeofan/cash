@@ -26,8 +26,6 @@ class NewsScreen extends StatelessWidget {
             },
             icon: SvgPicture.asset(
               'assets/icons/leading.svg',
-              width: size.width * 0.08,
-              height: size.width * 0.08,
             ),
           ),
           elevation: 0,

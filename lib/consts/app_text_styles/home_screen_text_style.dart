@@ -8,10 +8,10 @@ class HomeScreenTextStyle {
     fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
   );
-  static TextStyle bannerSpendings = TextStyle(
+  static const TextStyle bannerSpendings = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 20.0,
-    fontWeight: FontWeight.w400,
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
     color: AppColors.blackColor,
   );
   static const TextStyle bannerTitle = TextStyle(
@@ -23,7 +23,7 @@ class HomeScreenTextStyle {
   static TextStyle incomeBannerTitle = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18.0,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     color: AppColors.blackColor.withOpacity(0.4),
   );
   static TextStyle bannerText = TextStyle(

@@ -42,8 +42,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
           icon: SvgPicture.asset(
             'assets/icons/leading.svg',
-            width: size.width * 0.08,
-            height: size.width * 0.08,
           ),
         ),
       ),
