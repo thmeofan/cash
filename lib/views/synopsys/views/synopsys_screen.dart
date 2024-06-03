@@ -75,17 +75,6 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                 );
               },
               icon: SvgPicture.asset('assets/icons/settings.svg')),
-          // TextButton(
-          //     onPressed: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => HistoryScreen(
-          //                   operations: operations,
-          //                 )),
-          //       );
-          //     },
-          //     child: Text('History'))
         ],
       ),
       body: Center(
@@ -102,7 +91,6 @@ class _SynopsysScreenState extends State<SynopsysScreen> {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(
