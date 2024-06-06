@@ -21,11 +21,6 @@ class WidgetTextStyle {
     fontWeight: FontWeight.w500,
     color: AppColors.blackColor.withOpacity(0.4),
   );
-  static const TextStyle appBar = TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 16.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.greenColor);
 
   static const TextStyle lable = TextStyle(
     fontFamily: 'Roboto',

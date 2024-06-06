@@ -425,7 +425,7 @@ class _StatisticScreenState extends State<StatisticScreen> {
                   color: Colors.grey,
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 SizedBox(
                     height: size.height * 0.37,

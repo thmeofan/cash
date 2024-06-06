@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/home_screen_text_style.dart';
 import '../../synopsys/widgets/category_icon.dart';
 
 class OperationsByCategoryListView extends StatefulWidget {
@@ -22,7 +23,7 @@ class _OperationsByCategoryListViewState
   int _selectedIndex = 0;
 
   List<Map<String, dynamic>> get _filteredOperations {
-    final type = _selectedIndex == 0 ? 'Income' : 'Expenses';
+    final type = _selectedIndex == 0 ? 'Income' : 'Spendings';
     return widget.operations.where((op) => op['type'] == type).toList();
   }
 
@@ -192,7 +193,8 @@ class _OperationsByCategoryListViewState
                 );
 
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
                   child: Container(
                     decoration: BoxDecoration(
                       color: AppColors.lightGreyColor,
@@ -202,17 +204,20 @@ class _OperationsByCategoryListViewState
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           categoryIconPath != null
                               ? SvgPicture.asset(
                                   categoryIconPath,
                                   width: 24.0,
                                   height: 24.0,
+                                  color: Colors.black,
                                 )
                               : const SizedBox.shrink(),
-                          const SizedBox(height: 4),
-                          Text(category, style: WidgetTextStyle.subtitle),
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 10),
+                          Text(category,
+                              style: HomeScreenTextStyle.incomeBannerTitle),
+                          const SizedBox(height: 6),
                           Text('\$ $totalAmount', style: WidgetTextStyle.title),
                         ],
                       ),
