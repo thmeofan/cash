@@ -12,6 +12,7 @@ class OnboardingTextStyle {
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
       color: Colors.black.withOpacity(0.4));
+
   static const TextStyle button = TextStyle(
     fontFamily: 'SF Pro Text',
     fontSize: 17.0,

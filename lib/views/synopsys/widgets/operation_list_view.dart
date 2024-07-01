@@ -211,7 +211,7 @@ class _OperationsListViewState extends State<OperationsListView> {
             margin: const EdgeInsets.all(8.0),
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: AppColors.lightGreyColor,
+              color: AppColors.yellowColor.withOpacity(0.14),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(

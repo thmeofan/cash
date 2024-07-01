@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 import '../../../consts/app_text_styles/settings_text_style.dart';
+import '../../../util/helpers/contact_dialog.dart';
 import '../../app/views/my_in_app_web_view.dart';
+import '../../statistics_screen/views/privacy_policy_page.dart';
+import '../../statistics_screen/views/terms_of_use_page.dart';
 import '../widgets/feedback_banner.dart';
 import '../widgets/settings_widget.dart';
 
@@ -80,8 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
+                                builder: (context) => TermsOfUsePage(),
                               ),
                             );
                           },
@@ -101,8 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
+                                builder: (context) => PrivacyPolicyPage(),
                               ),
                             );
                           },
@@ -117,14 +120,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Colors.grey,
                         ),
                         SettingsTile(
-                          text: 'Support page',
+                          text: 'Contact us',
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
-                              ),
+                            showCupertinoDialog(
+                              context: context,
+                              builder: (context) => const ContactDialog(),
                             );
                           },
                           action: SvgPicture.asset('assets/icons/arrow.svg'),
@@ -138,36 +138,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Colors.grey,
                         ),
                         SettingsTile(
-                          text: 'Share with friends',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
-                              ),
-                            );
-                          },
-                          action: SvgPicture.asset('assets/icons/arrow.svg'),
-                          assetName: 'assets/icons/share.svg',
-                        ),
-                        const Divider(
-                          indent: 6,
-                          endIndent: 8,
-                          height: 1.0,
-                          thickness: 0.2,
-                          color: Colors.grey,
-                        ),
-                        SettingsTile(
-                          text: 'Subscription info',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyScreenForVIew(
-                                    url: 'https://google.com/'),
-                              ),
-                            );
+                          text: 'Rate us',
+                          onTap: () async {
+                            if (await InAppReview.instance.isAvailable()) {
+                              await InAppReview.instance.requestReview();
+                            }
                           },
                           action: SvgPicture.asset('assets/icons/arrow.svg'),
                           assetName: 'assets/icons/subscriprion.svg',

@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 topRight: Radius.circular(10),
               )),
               width: double.infinity,
-              height: size.height * 0.5,
+              height: size.height * 0.38,
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.02),
                 child: Column(
@@ -103,8 +103,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       text: 'Get started',
                     ),
                     SizedBox(
-                      height: size.height * 0.035,
+                      height: size.height * 0.015,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Terms of use',
+                              style: OnboardingTextStyle.description,
+                            )),
+                        Text(
+                          '/',
+                          style: OnboardingTextStyle.description,
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Privacy Policy',
+                              style: OnboardingTextStyle.description,
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),

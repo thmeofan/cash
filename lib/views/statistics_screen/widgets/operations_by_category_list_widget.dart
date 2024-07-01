@@ -27,8 +27,41 @@ class _OperationsByCategoryListViewState
     return widget.operations.where((op) => op['type'] == type).toList();
   }
 
+  final List<Map<String, dynamic>> _incomeCategories = [
+    {'name': 'Salary', 'icon': 'assets/icons/salary.svg'},
+    {'name': 'Dividends', 'icon': 'assets/icons/dividends.svg'},
+    {'name': 'Investment', 'icon': 'assets/icons/investment.svg'},
+    {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
+    {'name': 'Freelance', 'icon': 'assets/icons/freelance.svg'},
+    {'name': 'Business', 'icon': 'assets/icons/business.svg'},
+    {'name': 'Royalty', 'icon': 'assets/icons/royalty.svg'},
+    {'name': 'Passive', 'icon': 'assets/icons/passive.svg'},
+  ];
+
+  final List<Map<String, dynamic>> _expenseCategories = [
+    {'name': 'Procurement', 'icon': 'assets/icons/procurement.svg'},
+    {'name': 'Food', 'icon': 'assets/icons/food.svg'},
+    {'name': 'Transport', 'icon': 'assets/icons/transport.svg'},
+    {'name': 'Rest', 'icon': 'assets/icons/rest.svg'},
+    {'name': 'Rent', 'icon': 'assets/icons/rent.svg'},
+    {'name': 'Investment', 'icon': 'assets/icons/investment.svg'},
+  ];
+  List<Map<String, dynamic>> get _allCategories {
+    return [
+      ..._incomeCategories,
+      ..._expenseCategories,
+    ];
+  }
+
   Map<String, double> get _categorySums {
     final categorySums = <String, double>{};
+    final categories =
+        _selectedIndex == 0 ? _incomeCategories : _expenseCategories;
+
+    for (final category in categories) {
+      categorySums[category['name']] = 0.0;
+    }
+
     for (final operation in _filteredOperations) {
       final categoryName = operation['description'];
       final amount = operation['amount'];
@@ -180,11 +213,17 @@ class _OperationsByCategoryListViewState
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.2,
                 crossAxisCount: 2,
               ),
-              itemCount: _categorySums.length,
+              itemCount:
+                  (_selectedIndex == 0 ? _incomeCategories : _expenseCategories)
+                      .length,
               itemBuilder: (context, index) {
-                final category = _categorySums.keys.toList()[index];
+                final categories = _selectedIndex == 0
+                    ? _incomeCategories
+                    : _expenseCategories;
+                final category = categories[index]['name'];
                 final totalAmount = _categorySums[category] ?? 0;
 
                 final categoryIconPath = CategoryIcon.getIconPath(
@@ -206,14 +245,16 @@ class _OperationsByCategoryListViewState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          categoryIconPath != null
-                              ? SvgPicture.asset(
-                                  categoryIconPath,
-                                  width: 24.0,
-                                  height: 24.0,
-                                  color: Colors.black,
-                                )
-                              : const SizedBox.shrink(),
+                          if (categoryIconPath != null)
+                            SvgPicture.asset(
+                              categoryIconPath,
+                              width: 24.0,
+                              height: 24.0,
+                              color: Colors.black,
+                            ),
+                          if (categoryIconPath == null)
+                            const SizedBox(
+                                height: 24.0), // Placeholder for icon
                           const SizedBox(height: 10),
                           Text(category,
                               style: HomeScreenTextStyle.incomeBannerTitle),
